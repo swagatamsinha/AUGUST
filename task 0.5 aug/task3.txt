@@ -1,0 +1,7 @@
+    <?php
+                                                    $sql="SELECT user_fullname FROM capms_admin_users WHERE id = '".$row1['reports_to_uid']."' ";
+                                                    $report_query = mysqli_query($con, $sql);
+                                                    if($report_query->num_rows > 0){
+                                                        while($report_row = mysqli_fetch_assoc($report_query)){
+                                                            ?>
+                                                            <p class="demo"><?php echo $report_row['user_fullname']; ?></p>

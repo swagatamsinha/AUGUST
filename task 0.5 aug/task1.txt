@@ -1,0 +1,82 @@
+  <?php
+                                        $sql1 = "SELECT * FROM capms_admin_users WHERE id = '".$_SESSION['emp_id']."' ";
+                                        $result1 = mysqli_query($con, $sql1);
+                                        if($result1->num_rows > 0)
+                                        {
+                                            while($row1 = mysqli_fetch_assoc($result1))
+                                            {
+                                                ?>
+                                                <div class="form-row">
+                                                    <!-- Fullname  -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Fullname</label>
+                                                        <input type="text" class="form-control" placeholder="Fullname" name="user_fullname" id="user_fullname" value="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" required>
+                                                    </div>
+                                                    <!-- EMP ID -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Employee ID</label>
+                                                        <input type="text" class="form-control" placeholder="Employee ID" name="user_empid" id="user_empid" value="<?php if($row1['user_empid'] != '') { echo $row1['user_empid']; }?>" disabled>
+                                                    </div>
+                                                    <!-- Email Address -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Email Address</label>
+                                                        <input type="email" class="form-control" placeholder="Email Address" name="user_email" id="user_email" value="<?php if($row1['user_email'] != '') { echo $row1['user_email']; }?>" required>
+                                                    </div>
+                                                    <!-- Contact Number -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Contact Number</label>
+                                                        <input type="text" class="form-control" placeholder="Contact Number" name="user_contact" id="user_contact" value="<?php if($row1['user_contact'] != '') { echo $row1['user_contact']; }?>" required>
+                                                    </div>
+                                                    <!-- Joining Date -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Joining Date</label>
+                                                        <input type="date" class="form-control" name="user_joining_date" id="user_joining_date" value="<?php if($row1['user_joining_date'] != '') { echo $row1['user_joining_date']; }?>" required>
+                                                    </div>
+                                                    
+                                                    <!-- Featured Image -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Featured Image</label>
+                                                        <span class="featured-img-wrap">
+                                                            <img src="<?php if($row1['user_featured_image'] != '') { echo 'assets/uploads/user_featured_images/'.$row1['user_featured_image']; }?>" title="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" alt="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" class="user-featured-img">
+                                                        </span>
+                                                        <input type="file" class="form-control" name="user_featured_image" id="user_featured_image">
+                                                    </div>
+                                                    <!-- reports to -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Reports to</label>
+                                                        <select type="text" class="form-control" name="select_reports_to" id="Reports_to_dropdown">
+                                                        <option> CHOOSE ONE..</option>
+                                                        <?php
+                                                        $report_query = "SELECT * FROM capms_admin_users WHERE id != '".$_SESSION['emp_id']."' ";
+                                                        $reportResult = mysqli_query($con, $report_query);
+                                                        if($reportResult-> num_rows > 0){
+                                                            while($reportRow = mysqli_fetch_assoc($reportResult)){ 
+                                                                ?>
+                                                           <option value="$reportRow['reports_to_uid']"  ><?php echo $reportRow['user_fullname']; ?></option>
+                                                             
+                                                            <?php
+                                                            }
+                                                        }
+                                                        
+                                                       ?>
+                                                        
+                                                        </select>
+                                                        
+                                                    </div>
+                                                    <!-- Salary -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Salary</label>
+                                                        <input type="text" class="form-control" placeholder="Salary" name="user_salary" id="user_salary" value="<?php if($row1['user_salary'] != '') { echo $row1['user_salary']; }?>" disabled>
+                                                    </div>
+                                                    <!-- Navigation Button -->
+                                                    <div class="col-md-12 text-center">
+                                                        <!-- <a href="profile.php" class="btn dp-em-nxt-btn frm-previous-btn">Previous</a> -->
+                                                        <input type="submit" name="user_information_update" class="btn dp-em-nxt-btn frm-next-btn" id="user_information_update" value="Next">
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                        }
+                                    ?>
+                                </form>
+
